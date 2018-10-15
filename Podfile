@@ -13,6 +13,8 @@ target 'GitHubAPI' do
   target 'GitHubAPITests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Cuckoo'
+    pod 'RxSwift'
   end
 
   target 'GitHubAPIUITests' do

@@ -12,7 +12,9 @@ import RxSwift
 
 class MainApiService {
     
-    static func fetchRepositories() -> Observable<Repository> {
+    static let shared = MainApiService()
+    
+    func fetchRepositories() -> Observable<Repository> {
         return Observable<Repository>.create({ (observer) -> Disposable in
             let request = Alamofire
                 .request(Endpoints.urlForSwiftRepositories, method: .get)
@@ -40,7 +42,7 @@ class MainApiService {
         })
     }
     
-    static func fetchPullRequests(withUrl url: URL) -> Observable<[PullRequest]> {
+    func fetchPullRequests(withUrl url: URL) -> Observable<[PullRequest]> {
         return Observable<[PullRequest]>.create({ (observer) -> Disposable in
             let request = Alamofire
                 .request(url, method: .get)

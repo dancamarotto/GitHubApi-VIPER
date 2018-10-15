@@ -12,12 +12,13 @@ import RxSwift
 class RepositoriesInteractor: RepositoriesUseCase {
     
     weak var output: RepositoriesInteractorOutput!
+    weak var apiService: MainApiService?
     private var disposeBag = DisposeBag()
     
     func fetchRepositories() {
-        MainApiService
-            .fetchRepositories()
-            .subscribe(onNext: { (repository) in
+        let api = apiService ?? MainApiService.shared
+        api.fetchRepositories()
+           .subscribe(onNext: { (repository) in
                 self.output.repositoriesFetched(repository)
             }, onError: { (error) in
                 self.output.repositoriesFetchFailed()

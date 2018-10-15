@@ -12,6 +12,5 @@ class Endpoints {
     
     private static let baseUrl = "https://api.github.com"
     static let urlForSwiftRepositories = "\(baseUrl)/search/repositories?q=language:Swift&Sort=stars"
-    // /search/repositories?q=language:Swift&Sort=stars&page=
     
 }

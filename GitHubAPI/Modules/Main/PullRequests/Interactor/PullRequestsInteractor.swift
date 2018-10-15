@@ -15,7 +15,7 @@ class PullRequestsInteractor: PullRequestsUseCase {
     let disposeBag = DisposeBag()
     
     func fetchPullRequests(withUrl url: URL) {
-        MainApiService
+        MainApiService.shared
             .fetchPullRequests(withUrl: url)
             .subscribe(onNext: { (pullRequests) in
                 self.output?.pullRequestsFetched(pullRequests)
