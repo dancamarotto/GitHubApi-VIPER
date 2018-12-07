@@ -12,8 +12,8 @@ import RxSwift
 class RepositoriesInteractor: RepositoriesUseCase {
     
     weak var output: RepositoriesInteractorOutput!
-    weak var apiService: MainApiService?
     private var disposeBag = DisposeBag()
+    var apiService: MainApiService?
     
     func fetchRepositories() {
         let api = apiService ?? MainApiService.shared

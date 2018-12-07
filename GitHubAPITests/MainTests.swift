@@ -25,13 +25,13 @@ class MainTests: XCTestCase {
         let presenter = RepositoriesPresenter()
         let interactor = RepositoriesInteractor()
         let router = RepositoriesRouter()
-        let mock = MockMainApiService()
+        interactor.apiService = MockMainApiService()
+        weak var api = interactor.apiService as? MockMainApiService
         
-        stub(mock) { (apiService) in
+        stub(api!) { (apiService) in
             when(apiService.fetchRepositories()).thenReturn(fetchMockedRepository())
         }
         
-        interactor.apiService = mock
         interactor.output = presenter
         presenter.interactor = interactor
         presenter.router = router

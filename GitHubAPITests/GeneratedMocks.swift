@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: GitHubAPI/Modules/Main/Network/MainApiService.swift at 2018-10-15 00:40:09 +0000
+// MARK: - Mocks generated from file: GitHubAPI/Modules/Main/Network/MainApiService.swift at 2018-12-07 16:24:08 +0000
 
 //
 //  MainApiService.swift
