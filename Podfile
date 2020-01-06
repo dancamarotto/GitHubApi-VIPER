@@ -5,16 +5,14 @@ target 'GitHubAPI' do
   use_frameworks!
 
   # Pods for GitHubAPI
-  pod 'RxSwift'
+  pod 'RxSwift', '~> 5'
   pod 'Alamofire'
   pod 'PKHUD'
-  pod 'Kingfisher'
+  pod 'Kingfisher', '~> 5.0'
 
   target 'GitHubAPITests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'Cuckoo'
-    pod 'RxSwift'
   end
 
   target 'GitHubAPIUITests' do

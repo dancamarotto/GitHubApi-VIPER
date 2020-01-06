@@ -40,6 +40,16 @@ public final class HUD {
         set { PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = newValue }
     }
 
+    public static var leadingMargin: CGFloat {
+        get { return PKHUD.sharedHUD.leadingMargin  }
+        set { PKHUD.sharedHUD.leadingMargin = newValue }
+    }
+
+    public static var trailingMargin: CGFloat {
+        get { return PKHUD.sharedHUD.trailingMargin  }
+        set { PKHUD.sharedHUD.trailingMargin = newValue }
+    }
+
     public static var isVisible: Bool { return PKHUD.sharedHUD.isVisible }
 
     // MARK: Public methods, PKHUD based
@@ -69,6 +79,15 @@ public final class HUD {
     public static func flash(_ content: HUDContentType, onView view: UIView? = nil, delay: TimeInterval, completion: ((Bool) -> Void)? = nil) {
         HUD.show(content, onView: view)
         HUD.hide(afterDelay: delay, completion: completion)
+    }
+    
+    // MARK: Keyboard Methods
+    public static func registerForKeyboardNotifications() {
+        PKHUD.sharedHUD.registerForKeyboardNotifications()
+    }
+    
+    public static func deregisterFromKeyboardNotifications() {
+        PKHUD.sharedHUD.deregisterFromKeyboardNotifications()
     }
 
     // MARK: Private methods

@@ -34,12 +34,12 @@ class ExtensionsTests: XCTestCase {
         XCTAssertEqual(tenThousandComma, "10,000")
         XCTAssertEqual(tenThousandSpace, "10 000")
         
-        let tenMillionDot   = 1000000.formatted(withSeparator: ".")
-        let tenMillionComma = 1000000.formatted(withSeparator: ",")
-        let tenMillionSpace = 1000000.formatted(withSeparator: " ")
-        XCTAssertEqual(tenMillionDot,   "1.000.000")
-        XCTAssertEqual(tenMillionComma, "1,000,000")
-        XCTAssertEqual(tenMillionSpace, "1 000 000")
+        let oneMillionDot   = 1000000.formatted(withSeparator: ".")
+        let oneMillionComma = 1000000.formatted(withSeparator: ",")
+        let oneMillionSpace = 1000000.formatted(withSeparator: " ")
+        XCTAssertEqual(oneMillionDot,   "1.000.000")
+        XCTAssertEqual(oneMillionComma, "1,000,000")
+        XCTAssertEqual(oneMillionSpace, "1 000 000")
     }
     
 }
