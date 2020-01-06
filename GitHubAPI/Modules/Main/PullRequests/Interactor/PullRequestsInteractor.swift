@@ -12,15 +12,16 @@ import RxSwift
 class PullRequestsInteractor: PullRequestsUseCase {
 
     weak var output: PullRequestsInteractorOutput?
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
+    private let apiService = Network()
     
     func fetchPullRequests(withUrl url: URL) {
-        MainApiService.shared
-            .fetchPullRequests(withUrl: url)
-            .subscribe(onNext: { (pullRequests) in
-                self.output?.pullRequestsFetched(pullRequests)
-            }, onError: { (error) in
-                self.output?.pullRequestsFetchFailed()
-            }).disposed(by: disposeBag)
+        apiService
+            .request(url: url.absoluteString, returnType: [PullRequest].self)
+            .subscribe(onSuccess: { [weak self] pullRequests in
+                self?.output?.pullRequestsFetched(pullRequests)
+            }) { [weak self] _ in
+                self?.output?.pullRequestsFetchFailed()
+        }.disposed(by: disposeBag)
     }
 }

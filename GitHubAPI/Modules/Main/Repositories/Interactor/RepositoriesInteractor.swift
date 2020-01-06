@@ -12,17 +12,18 @@ import RxSwift
 class RepositoriesInteractor: RepositoriesUseCase {
     
     weak var output: RepositoriesInteractorOutput!
-    private var disposeBag = DisposeBag()
-    var apiService: MainApiService?
+    private let disposeBag = DisposeBag()
+    private let apiService = Network()
     
     func fetchRepositories() {
-        let api = apiService ?? MainApiService.shared
-        api.fetchRepositories()
-           .subscribe(onNext: { (repository) in
-                self.output.repositoriesFetched(repository)
-            }, onError: { (error) in
-                self.output.repositoriesFetchFailed()
-            }).disposed(by: disposeBag)
+        let url = "\(apiService.baseUrl)/search/repositories?q=language:Swift&Sort=stars"
+        
+        apiService
+            .request(url: url, returnType: Repository.self)
+            .subscribe(onSuccess: { [weak self] repository in
+                self?.output.repositoriesFetched(repository)
+            }) { [weak self] _ in
+                self?.output.repositoriesFetchFailed()
+        }.disposed(by: disposeBag)
     }
-    
 }
