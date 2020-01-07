@@ -15,7 +15,7 @@ class RepositoriesRouter: RepositoriesWireframe {
     static func assembleModule() -> UIViewController {
         let view = instantiateView(named: RepositoriesViewController.viewID, from: mainStoryboard) as! RepositoriesViewController
         let presenter = RepositoriesPresenter()
-        let interactor = RepositoriesInteractor()
+        let interactor = RepositoriesInteractor(network: Network())
         let router = RepositoriesRouter()
         
         view.presenter = presenter

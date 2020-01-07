@@ -10,14 +10,25 @@ import UIKit
 import RxSwift
 
 class PullRequestsInteractor: PullRequestsUseCase {
+    
+    // MARK: - Properties
 
     weak var output: PullRequestsInteractorOutput?
+    let network: Networking
     private let disposeBag = DisposeBag()
-    private let apiService = Network()
+    
+    // MARK: - Initialization
+    
+    init(network: Networking) {
+        self.network = network
+    }
+    
+    // MARK: - Use case
     
     func fetchPullRequests(withUrl url: URL) {
-        apiService
-            .request(url: url.absoluteString, returnType: [PullRequest].self)
+        network
+            .request(url: url.absoluteString, method: .get,
+                     parameters: nil, returnType: [PullRequest].self)
             .subscribe(onSuccess: { [weak self] pullRequests in
                 self?.output?.pullRequestsFetched(pullRequests)
             }) { [weak self] _ in

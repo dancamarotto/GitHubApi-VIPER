@@ -15,7 +15,7 @@ class PullRequestsRouter: PullRequestsWireframe {
     static func assembleModule(_ repository: RepositoryItem) -> UIViewController {
         let view = instantiateView(named: PullRequestsViewController.viewID, from: mainStoryboard) as! PullRequestsViewController
         let presenter = PullRequestsPresenter()
-        let interactor = PullRequestsInteractor()
+        let interactor = PullRequestsInteractor(network: Network())
         let router = PullRequestsRouter()
 
         view.presenter = presenter

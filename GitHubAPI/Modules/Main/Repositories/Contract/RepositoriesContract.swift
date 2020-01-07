@@ -25,6 +25,7 @@ protocol RepositoriesPresentation: class {
 
 protocol RepositoriesUseCase: class {
     var output: RepositoriesInteractorOutput! { get set }
+    var network: Networking { get }
     
     func fetchRepositories()
 }

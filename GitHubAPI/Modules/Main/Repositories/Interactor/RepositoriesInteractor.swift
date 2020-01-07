@@ -11,15 +11,26 @@ import RxSwift
 
 class RepositoriesInteractor: RepositoriesUseCase {
     
+    // MARK: - Properties
+    
     weak var output: RepositoriesInteractorOutput!
+    let network: Networking
     private let disposeBag = DisposeBag()
-    private let apiService = Network()
+    
+    // MARK: - Initialization
+    
+    init(network: Networking) {
+        self.network = network
+    }
+    
+    // MARK: - Use case
     
     func fetchRepositories() {
-        let url = "\(apiService.baseUrl)/search/repositories?q=language:Swift&Sort=stars"
+        let url = "\(network.baseUrl)/search/repositories?q=language:Swift&Sort=stars"
         
-        apiService
-            .request(url: url, returnType: Repository.self)
+        network
+            .request(url: url, method: .get, parameters: nil,
+                     returnType: Repository.self)
             .subscribe(onSuccess: { [weak self] repository in
                 self?.output.repositoriesFetched(repository)
             }) { [weak self] _ in

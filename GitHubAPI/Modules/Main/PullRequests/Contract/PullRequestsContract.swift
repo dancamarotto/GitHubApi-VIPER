@@ -25,6 +25,7 @@ protocol PullRequestsPresentation: class {
 
 protocol PullRequestsUseCase: class {
     var output: PullRequestsInteractorOutput? { get set }
+    var network: Networking { get }
     
     func fetchPullRequests(withUrl url: URL)
 }
