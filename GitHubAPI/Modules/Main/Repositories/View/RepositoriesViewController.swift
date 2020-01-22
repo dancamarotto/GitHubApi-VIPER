@@ -12,7 +12,12 @@ class RepositoriesViewController: UIViewController, RepositoriesView {
     
     // MARK: - Outlets and variables
     
-    @IBOutlet weak var repositoriesTableView: UITableView!
+    @IBOutlet weak var repositoriesTableView: UITableView! {
+        didSet {
+            let nib = UINib(nibName: "RepositoryTableViewCell", bundle: nil)
+            repositoriesTableView.register(nib, forCellReuseIdentifier: repositoryTableViewCellID)
+        }
+    }
     
     static let viewID = "RepositoriesViewID"
     let repositoryTableViewCellID = "RepositoryTableViewCellID"
@@ -28,15 +33,7 @@ class RepositoriesViewController: UIViewController, RepositoriesView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerNibs()
         presenter.viewDidLoad()
-    }
-    
-    // MARK: - Private functions
-    
-    private func registerNibs() {
-        let nib = UINib(nibName: "RepositoryTableViewCell", bundle: nil)
-        repositoriesTableView.register(nib, forCellReuseIdentifier: repositoryTableViewCellID)
     }
     
     // MARK: - Repositories View

@@ -12,7 +12,12 @@ class PullRequestsViewController: UIViewController, PullRequestsView {
     
     // MARK: - Outlets and variables
     
-    @IBOutlet weak var pullRequestsTableView: UITableView!
+    @IBOutlet weak var pullRequestsTableView: UITableView! {
+        didSet {
+            let nib = UINib(nibName: "PullRequestTableViewCell", bundle: nil)
+            pullRequestsTableView.register(nib, forCellReuseIdentifier: pullRequestTableViewCellID)
+        }
+    }
     
     static let viewID = "PullRequestsViewID"
     let pullRequestTableViewCellID = "PullRequestTableViewCellID"
@@ -29,18 +34,6 @@ class PullRequestsViewController: UIViewController, PullRequestsView {
         super.viewDidLoad()
         
         presenter.viewDidLoad()
-        registerNibs()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
-    
-    // MARK: - Private functions
-    
-    private func registerNibs() {
-        let nib = UINib(nibName: "PullRequestTableViewCell", bundle: nil)
-        pullRequestsTableView.register(nib, forCellReuseIdentifier: pullRequestTableViewCellID)
     }
     
     // MARK: - Pull Requests View
